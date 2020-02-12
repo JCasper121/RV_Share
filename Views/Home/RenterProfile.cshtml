@@ -1,0 +1,22 @@
+@model ProfileViewModel
+
+<div class="row">
+    <h1>Renter</h1>
+    <div class="col-4">
+        <img src="~\images\profilepic.jpg" alt="Profile Picture">
+    </div>
+    <div class = "col-4">
+        <h3>@Model.ProfileUser.Name</h3>
+        <h5>@Model.ProfileUser.City, @Model.ProfileUser.State</h5>
+    </div>
+    <div class = "col-4">
+        <h5>Contact info:</h5>
+        <p>@Model.ProfileUser.Email</p>
+        <p>@Model.ProfileUser.Phone</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <h2>Reviews from Owners</h2>
+    </div>
+</div>

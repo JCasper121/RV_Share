@@ -1,0 +1,38 @@
+@model ProfileViewModel
+
+<div class="row">
+    <div class="col-4 mb-5">
+        <img src="~images\profilepic.jpg" alt="Profile Picture">
+    </div>
+    <div class = "col-4 mb-5">
+        <h3>@Model.ProfileUser.Name - Owner</h3>
+        <h5>@Model.ProfileUser.City, @Model.ProfileUser.State</h5>
+    </div>
+    <div class = "col-4 mb-5">
+        <h5>Contact info:</h5>
+        <p>Email: @Model.ProfileUser.Email</p>
+        <p>Phone: @Model.ProfileUser.Phone</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+    </div>
+    <div class="col-6">
+        <h3>Listings:</h3>
+        @foreach(Listing l in Model.Listings)
+        {
+            <h5><a href="/listing/@l.ListingId">@l.Year @l.Make @l.Model</a></h5>
+            <h6>$ @l.Rate</h6>
+            @if(Model.ProfileUser.UserId == Model.LoggedUser.UserId)
+            {
+                <button class="btn btn-light m-2"><a href="/edit/@l.ListingId">Edit</a></button>
+                <button class="btn btn-danger m-2"><a href="/delete/@l.ListingId">Delete</a></button>
+            }
+        }
+        
+        @if(Model.ProfileUser.UserId == Model.LoggedUser.UserId)
+        {
+            <button class="btn btn-dark m-5"><a href="/newlisting">New Listing</a></button>
+        }
+    </div>
+</div>

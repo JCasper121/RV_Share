@@ -1,0 +1,12 @@
+@model Amenity
+
+<h1>Add a New Amenity</h1>
+<div class="row">
+    <form asp-action="AddAmenity">
+        <label for="AmenityName">Amenity:</label>
+        <span asp-validation-for="AmenityName"></span>
+        <input class="form-control" type="text" asp-for="AmenityName">
+
+        <button type="submit" class="btn btn-light mt-5">Add Amenity</button>
+    </form>
+</div>

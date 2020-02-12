@@ -1,0 +1,28 @@
+﻿@model HomeViewModel
+<div class="hp">
+<h1>RV Share</h1>
+    <div class="row ">
+        <div class="col-6">
+            <h3 class="mt-5">About the site:</h3>
+            <p>Our mission is to connect RV, camper, and van owners with other adventurous spirits in order to make the outdoors more accessible,
+                and maximize our collective experience of nature.
+            </p>
+            <p>Do you need a recreational vehicle for your next camping trip? 
+                Do you need extra space for guests you're hosting? Do you have an RV, camper or van that you could be making money on?
+                Let RV share help you out!
+            </p>
+        </div>
+        <div class="col-6">
+            <h2>Listings:</h2>
+            <ul>
+            @foreach(Listing l in Model.Listings)
+            {
+                <li>
+                <h5><a href="/listing/@l.ListingId">@l.Year @l.Make @l.Model</a></h5>
+                <h6>$ @l.Rate / Day</h6>
+                </li>
+            }
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+@model ListingFormViewModel
+
+<div class="row">
+    <form class="row" asp-action="Update">
+        <div class="col-6">
+            <h1>Edit Listing</h1>
+            <label asp-for="Listing.Make">Make:</label>
+            <span asp-validation-for="Listing.Make"></span>
+            <input class="form-control" asp-for="Listing.Make" type="text">
+
+            <label asp-for="Listing.Model">Model:</label>
+            <span asp-validation-for="Listing.Model"></span>
+            <input class="form-control" asp-for="Listing.Model" type="text">
+
+            <label asp-for="Listing.Year">Year:</label>
+            <span asp-validation-for="Listing.Year"></span>
+            <input class="form-control" asp-for="Listing.Year" min="1950" max="2020">
+
+            <label asp-for="Listing.Type">Type:</label>
+            <span asp-validation-for="Listing.Type"></span>
+            <select class="form-control" asp-for="Listing.Type">
+                <option value="Class A">Class A</option>
+                <option value="Fifth Wheel">Fifth Wheel</option>
+                <option value="Truck Camper">Truck Camper</option>
+                <option value="Travel Trailer">Travel Trailer</option>
+                <option value="Class C">Class C</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <div class="form-group mt-5">
+                <label asp-for="Listing.Drivable">Driveable:</label>
+                <span asp-validation-for="Listing.Drivable"></span>
+                <input class="form-check-input ml-5 " asp-for="Listing.Drivable" type="checkbox">
+            </div>
+
+            <label asp-for="Listing.Capacity">Sleep-Capacity:</label>
+            <span asp-validation-for="Listing.Capacity"></span>
+            <input class="form-control" asp-for="Listing.Capacity" type="number" min="1" max="10">
+
+            <label asp-for="Listing.Rate">Daily Rate: (USD)</label>
+            <span asp-validation-for="Listing.Rate"></span>
+            <input class="form-control" asp-for="Listing.Rate" type="number">
+
+            <input type="hidden" asp-for="Listing.OwnerId" value="@Model.OwnerId">
+            <input type="hidden" asp-for="Listing.ListingId" value="@Model.Listing.ListingId">
+            
+        </div>
+        <div class="col-6">
+            <img style="width:500px" class="diagram" src="images\campers.jpg" alt="Campers">
+            <h3>Select Amenities:</h3>
+            <ul class="list">
+            @for(int i = 0; i < Model.Amenities.Count - 1; i++)
+            {
+                <li>
+                <div class="form-group">
+                    @Model.listingamenities[i].AmenityName
+                    @Html.CheckBoxFor(m => m.listingamenities[i].Bool)
+                    <input type="hidden" asp-for="listingamenities[i].AmenityName">
+                    <input type="hidden" asp-for="listingamenities[i].AmenityId">
+                    <input type="hidden" asp-for="listingamenities[i].ListingId">
+                    <input type="hidden" asp-for="listingamenities[i].ListingAmenityId">
+                </div>
+                </li>
+            }
+            </ul>
+            <p>Don't see an amenity? <a href="/newamenity">Add one to the list!</a></p>
+        </div>
+        <button type="submit" class="btn btn-primary mt-5">Update Listing</button>
+    </form>
+</div>

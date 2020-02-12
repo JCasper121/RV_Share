@@ -1,0 +1,60 @@
+@model ListingViewModel
+
+<div class="row">
+    <div class="col-4">
+        <p><h3>Make:</h3>@Model.Listing.Make</p>
+        <p><h3>Model:</h3>@Model.Listing.Model</p>
+        <p><h3>Year:</h3>@Model.Listing.Year</p>
+        <p><h3>Type:</h3>@Model.Listing.Type</p>
+    </div>
+    <div class="col-4">
+        <p><h3>Sleeping Capacity:</h3>@Model.Listing.Capacity</p>
+        <h3>Driveable?:</h3>
+        @if(Model.Listing.Drivable)
+        {
+            <p>Yes</p>
+        }
+        else
+        {
+            <p>No</p>
+        }
+        <p><h3>Daily Rate:</h3>$ @Model.Listing.Rate</p>
+    </div>
+    <h class="col-4">
+        <h1>Owner's Info:</h1>
+        <p><h3>Name:</h3>@Model.Owner.Name</p>
+        <h3>Address:</h3>
+        <p>@Model.Owner.Address</p>
+        <p>@Model.Owner.City, @Model.Owner.State</p>
+    </div>
+</div>
+<div class="row">
+    
+    <div class="col-6">
+        <h3>Amenities:</h3>
+        <ul class="list">
+        @foreach(ListingAmenity a in Model.Listing.Amenities)
+        {
+            <li><p>@a.Amenity.AmenityName</p></li>
+        }
+        </ul>
+    </div>
+    <div class="col-6">
+        @if(Model.LoggedUser != null)
+        {
+            @if(Model.LoggedUser.UserId == Model.Owner.UserId)
+            {
+                <button class="btn btn-light m-1"><a href="/edit/@Model.Listing.ListingId">Edit</a></button>
+                <button class="btn btn-danger m-1"><a href="/delete/@Model.Listing.ListingId">Delete</a></button>
+            }
+            else
+            {
+                <button class="btn btn-primary m-5"><a href="/rental/@Model.Listing.ListingId">Rent this Listing</a></button>
+            }
+        }
+        else
+        {
+            <button class="btn btn-light m-5"><a asp-controller="LogReg" asp-action="LogRegPage">Login to Rent!</a></button>
+        }
+    </div>
+</div>
